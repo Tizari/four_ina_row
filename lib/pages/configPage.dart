@@ -9,6 +9,7 @@ class _ConfigPageState extends State<ConfigPage> {
   int numRows = 6;
   int numColumns = 7;
 
+  // Erstellen der Bildschirmelemente
   @override
   Widget build(BuildContext context) {
     return Scaffold(

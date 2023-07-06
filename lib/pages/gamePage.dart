@@ -27,10 +27,11 @@ class _GamePageState extends State<GamePage> {
     super.initState();
     resetGame();
 
+    // Abwarten auf schütteln des Handys
     accelerometerEvents.listen((event) {
       if (event.x.abs() > 12 || event.y.abs() > 12 || event.z.abs() > 12) {
         setState(() {
-          Vibration.vibrate(duration: 1000);
+          Vibration.vibrate(duration: 500);
           backgroundColor = getRandomColor();
           resetGame();
         });
@@ -38,6 +39,7 @@ class _GamePageState extends State<GamePage> {
     });
   }
 
+  // Spielfeld wird zurückgesetzt
   void resetGame() {
     setState(() {
       gameBoard = List.generate(numRows, (_) => List.filled(numColumns, 0));
@@ -46,6 +48,7 @@ class _GamePageState extends State<GamePage> {
     });
   }
 
+  // Chips werden abwechselnd gesetzt
   void dropChip(int column) {
     if (!isGameOver) {
       for (int row = numRows - 1; row >= 0; row--) {
@@ -55,6 +58,7 @@ class _GamePageState extends State<GamePage> {
             currentPlayer = currentPlayer.id == 1 ? player2 : player1;
           });
 
+          // Popup bei Spielende
           if (checkWinner(row, column)) {
             setState(() {
               isGameOver = true;
@@ -84,6 +88,7 @@ class _GamePageState extends State<GamePage> {
     }
   }
 
+  // Überprüfe ob jemand gewonnen hat
   bool checkWinner(int row, int col) {
     int player = gameBoard[row][col];
 
@@ -150,6 +155,7 @@ class _GamePageState extends State<GamePage> {
     return false;
   }
 
+  // zufällige farbe generieren
   Color getRandomColor() {
     Random random = Random();
     return Color.fromARGB(
@@ -160,6 +166,7 @@ class _GamePageState extends State<GamePage> {
     );
   }
 
+  //Routing zur configPage
   void navigateToConfigPage() async {
     List<int>? config = await Navigator.push(
       context,
@@ -174,12 +181,13 @@ class _GamePageState extends State<GamePage> {
     }
   }
 
+  //Erstellen der Bildschirmelemente
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
-        title: Text('Vier gewinnt'),
+        title: Text('Four ina row'),
       ),
       body: Center(
         child: Column(
