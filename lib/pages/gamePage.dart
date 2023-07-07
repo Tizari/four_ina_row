@@ -29,7 +29,7 @@ class _GamePageState extends State<GamePage> {
 
     // Abwarten auf schütteln des Handys
     accelerometerEvents.listen((event) {
-      if (event.x.abs() > 12 || event.y.abs() > 12 || event.z.abs() > 12) {
+      if (event.x.abs() > 15 || event.y.abs() > 15 || event.z.abs() > 15) {
         setState(() {
           Vibration.vibrate(duration: 500);
           backgroundColor = getRandomColor();
