@@ -1,0 +1,48 @@
+@startuml
+
+package lib {
+ package main {
+    class VierGewinntApp {
+      + build(context: BuildContext): Widget
+    }
+  }
+
+  package screens {
+    class GamePage {
+      - List<List<int>> gameBoard
+      - int numRows
+      - int numColumns
+      - Player currentPlayer
+      - bool isGameOver
+      - Color backgroundColor
+      - Player player1
+      - Player player2
+      + initState()
+      + resetGame()
+      + dropChip(column: int)
+      + checkWinner(row: int, col: int): bool
+      + getRandomColor(): Color
+      + navigateToConfigPage()
+      + build(context: BuildContext): Widget
+    }
+    class ConfigPage {
+      - int numRows
+      - int numColumns
+      + build(context: BuildContext): Widget
+    }
+  }
+  package models {
+    class Player {
+      - int id
+      - Color color
+      + Player(id: int, color: Color)
+    }
+  }
+}
+
+VierGewinntApp --> GamePage
+GamePage --> ConfigPage
+GamePage --> Player
+
+
+@enduml
